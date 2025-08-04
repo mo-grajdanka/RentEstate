@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ───────────────────────── 1. базовые данные ───────────────────────── */
     const filters = { place: null, purpose: null, minArea: null, maxArea: null };
     const defaultAreas = [0, 50, 100, 200, 500, 1000];
-
+    window.filters = filters;
     /* регистрируем обёртки всех выпадашек: place / purpose / minArea / maxArea */
     const wrappers = {};
     document.querySelectorAll('.relative[data-filter-key]')
@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* подсветка активного пункта + текст на кнопке */
     function setFilterUI(key, text, value = null) {
         const wrap = wrappers[key];
+        if (!wrap) return;
         const btn = wrap.querySelector('.filter-toggle');
         const items = wrap.querySelectorAll('.filter-options a');
 
@@ -51,6 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ['minArea', 'maxArea'].forEach(key => {
             const wrap = wrappers[key];
+            if (!wrap) return;
             const menu = wrap.querySelector('.filter-options');
 
             menu.innerHTML = uniq
@@ -196,10 +198,4 @@ document.addEventListener('DOMContentLoaded', () => {
             .forEach(m => m.classList.add('hidden'));
     });
 });
-
-
-
-
-
-
 
