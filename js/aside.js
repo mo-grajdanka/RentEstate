@@ -1,25 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Используем dataByPurpose.land вместо homepageSettings.featuredSites
-  const sitesData = window.dataByPurpose?.land;
+  const sitesData = window.dataByPurpose?.land || [];
+  const sitesBlock = document.getElementById("sitesBlock");
+  const siteList   = document.getElementById("siteList");
 
-  if (Array.isArray(sitesData)) {
-    const siteList = document.getElementById("siteList");
-    // Отображаем все земельные участки, а не только 4 первых
-    const limitedSites = sitesData.slice(0, 4); 
+  if (!sitesData.length) {
+    sitesBlock.classList.add("hidden");
+    return;
+  }
 
-    siteList.innerHTML = limitedSites.map(site => `
+  // Показываем первые 4 или sitesData.slice(0,4)
+  siteList.innerHTML = sitesData.slice(0, 4).map(site => {
+    // Только place в URL
+    const listUrl = `pages/list.html?place=${encodeURIComponent(site.place)}`;
+    return `
       <div class="property-card bg-white rounded-lg overflow-hidden shadow-md">
-        <img src="${site.images[0]}" alt="${site.name}" class="w-full h-48 object-cover">
+        <img src="${site.images[0]}" alt="${site.name}"
+             class="w-full h-48 object-cover"
+             onerror="this.src='https://placehold.co/400x200?text=No+Image'">
         <div class="p-4">
           <h3 class="text-xl font-semibold mb-2">${site.name}</h3>
-          <p class="text-gray-600 mb-4">${site.place}, ${site.area} кв.м</p>
-          <a href="#" class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
+          <p class="text-gray-600 mb-4">${site.place}, ${site.area} м²</p>
+          <a href="${listUrl}"
+             class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
             Подробнее <i class="fas fa-arrow-right ml-2"></i>
           </a>
         </div>
       </div>
-    `).join("");
-  } else {
-    document.getElementById("sitesBlock")?.classList.add("hidden");
-  }
+    `;
+  }).join("");
 });
