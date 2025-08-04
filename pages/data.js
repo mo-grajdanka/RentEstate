@@ -1,9 +1,17 @@
+const placeDescriptions = {
+  'Кушелевская дорога': 'Крупный квартал с развитой инфраструктурой: магазины, кафе и рекреационные зоны.',
+  'Лабораторный проспект': 'Тихий проспект в пешей доступности от метро и большого городского парка — идеально для утренних пробежек.',
+  'Бестужевская': 'Уютный жилой район с хорошей транспортной доступностью и большим выбором коммерческой недвижимости.',
+  'АО «Сестрорецкий инструментальный»': 'Промышленная зона с развитой инженерной инфраструктурой и выходом к Сестрорецкому каналу.',
+};
+
 var dataByPurpose = {
   land: [
     {
       id: 1,
       name: "Участок A",
       place: "Кушелевская дорога",
+coordinates: [59.986111, 30.368838],
       area: 120,
       mainSlider: true,
       adSlider: true,
@@ -18,6 +26,7 @@ var dataByPurpose = {
       id: 2,
       name: "Участок B",
       place: "Лабораторный проспект",
+coordinates: [59.982286, 30.382180],
       area: 80,
       mainSlider: true,
       images: [
@@ -30,6 +39,7 @@ var dataByPurpose = {
       id: 3,
       name: "Участок C",
       place: "Бестужевская",
+coordinates: [59.990552, 30.383626],
       area: 65,
       images: [
         "https://images.unsplash.com/photo-1640881100814-453f76b431be?w=400&h=200&fit=crop",
@@ -41,6 +51,7 @@ var dataByPurpose = {
       id: 4,
       name: "Участок D",
       place: "АО «Сестрорецкий инструментальный»",
+coordinates: [60.092746, 29.958752],
       area: 350,
       mainSlider: true,
       adSlider: true,
@@ -80,6 +91,7 @@ var dataByPurpose = {
       floor: 3,
       area: 80,
       place: "Кушелевская дорога",
+coordinates: [59.986111, 30.368838],
       images: [
         "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://images.unsplash.com/photo-1511317559916-56d5ddb62563?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -92,6 +104,7 @@ var dataByPurpose = {
       floor: 1,
       area: 120,
       place: "Кушелевская дорога",
+coordinates: [59.986111, 30.368838],
       images: [
         "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://images.unsplash.com/photo-1511317559916-56d5ddb62563?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -104,6 +117,7 @@ var dataByPurpose = {
       floor: 5,
       area: 200,
       place: "Кушелевская дорога",
+coordinates: [59.986111, 30.368838],
       images: [
         "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://images.unsplash.com/photo-1511317559916-56d5ddb62563?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -116,6 +130,7 @@ var dataByPurpose = {
       floor: 7,
       area: 150,
       place: "Лабораторный проспект",
+coordinates: [59.982286, 30.382180],
       images: [
         "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://images.unsplash.com/photo-1511317559916-56d5ddb62563?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -128,6 +143,7 @@ var dataByPurpose = {
       floor: 2,
       area: 100,
       place: "Бестужевская",
+coordinates: [59.990552, 30.383626],
       adSlider: true,
       images: [
         "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -143,6 +159,7 @@ var dataByPurpose = {
       name: "Склад A",
       area: 2000,
       place: "Лабораторный проспект",
+coordinates: [59.982286, 30.382180],
       images: [
         "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://images.unsplash.com/photo-1511317559916-56d5ddb62563?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -154,6 +171,7 @@ var dataByPurpose = {
       name: "Склад B",
       area: 5000,
       place: "Бестужевская",
+coordinates: [59.990552, 30.383626],
       images: [
         "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://images.unsplash.com/photo-1511317559916-56d5ddb62563?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -175,6 +193,7 @@ var dataByPurpose = {
       name: "Склад D",
       area: 8000,
       place: "Бестужевская",
+coordinates: [59.990552, 30.383626],
       images: [
         "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://images.unsplash.com/photo-1511317559916-56d5ddb62563?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -186,6 +205,7 @@ var dataByPurpose = {
       name: "Склад E",
       area: 10000,
       place: "Бестужевская",
+coordinates: [59.990552, 30.383626],
       images: [
         "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://images.unsplash.com/photo-1511317559916-56d5ddb62563?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -200,6 +220,7 @@ var dataByPurpose = {
       name: "Производство A",
       area: 300,
       place: "Кушелевская дорога",
+coordinates: [59.986111, 30.368838],
       images: [
         "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://images.unsplash.com/photo-1511317559916-56d5ddb62563?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -211,6 +232,7 @@ var dataByPurpose = {
       name: "Производство B",
       area: 450,
       place: "Бестужевская",
+coordinates: [59.990552, 30.383626],
       images: [
         "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://images.unsplash.com/photo-1511317559916-56d5ddb62563?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -222,6 +244,7 @@ var dataByPurpose = {
       name: "Производство C",
       area: 600,
       place: "Бестужевская",
+coordinates: [59.990552, 30.383626],
       images: [
         "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://images.unsplash.com/photo-1511317559916-56d5ddb62563?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -233,6 +256,7 @@ var dataByPurpose = {
       name: "Производство D",
       area: 800,
       place: "Кушелевская дорога",
+coordinates: [59.986111, 30.368838],
       images: [
         "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://images.unsplash.com/photo-1511317559916-56d5ddb62563?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -244,6 +268,7 @@ var dataByPurpose = {
       name: "Производство E",
       area: 1000,
       place: "АО «Сестрорецкий инструментальный»",
+coordinates: [60.092746, 29.958752],
       images: [
         "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://images.unsplash.com/photo-1511317559916-56d5ddb62563?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -258,6 +283,7 @@ var dataByPurpose = {
       name: "Торг. площадь A",
       area: 50,
       place: "Кушелевская дорога",
+coordinates: [59.986111, 30.368838],
       adSlider: true,
       images: [
         "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -270,6 +296,7 @@ var dataByPurpose = {
       name: "Торг. площадь B",
       area: 75,
       place: "АО «Сестрорецкий инструментальный»",
+coordinates: [60.092746, 29.958752],
       images: [
         "https://plus.unsplash.com/premium_photo-1683133261283-78fe47339160?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cmV0YWlsfGVufDB8fDB8fHww",
         "https://plus.unsplash.com/premium_photo-1664202526047-405824c633e7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8cmV0YWlsfGVufDB8fDB8fHww",
@@ -281,6 +308,7 @@ var dataByPurpose = {
       name: "Торг. площадь C",
       area: 100,
       place: "Бестужевская",
+coordinates: [59.990552, 30.383626],
       images: [
         "https://images.unsplash.com/photo-1532453288672-3a27e9be9efd?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjJ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://images.unsplash.com/photo-1578916171728-46686eac8d58?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -292,6 +320,7 @@ var dataByPurpose = {
       name: "Торг. площадь D",
       area: 150,
       place: "Бестужевская",
+coordinates: [59.990552, 30.383626],
       images: [
         "https://images.unsplash.com/photo-1505275350441-83dcda8eeef5?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mzh8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://plus.unsplash.com/premium_photo-1661661903883-6d0d444ace70?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDN8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
@@ -303,6 +332,7 @@ var dataByPurpose = {
       name: "Торг. площадь E",
       area: 200,
       place: "Кушелевская дорога",
+coordinates: [59.986111, 30.368838],
       images: [
         "https://images.unsplash.com/photo-1584194655379-ff80a8fec339?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDh8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
         "https://plus.unsplash.com/premium_photo-1700824490100-f82146b2441f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTF8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
