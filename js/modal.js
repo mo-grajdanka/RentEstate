@@ -1,4 +1,4 @@
-// убираем DOMContentLoaded: подключим с defer
+
 function openModal() {
   document.getElementById('modal').classList.remove('hidden');
   document.body.style.overflow = 'hidden';
