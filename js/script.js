@@ -1,18 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
-    /* ───────────────────────── 1. базовые данные ───────────────────────── */
+    
     const filters = { place: null, purpose: null, minArea: null, maxArea: null };
     const defaultAreas = [0, 50, 100, 200, 500, 1000];
     window.filters = filters;
-    /* регистрируем обёртки всех выпадашек: place / purpose / minArea / maxArea */
+    
     const wrappers = {};
     document.querySelectorAll('.relative[data-filter-key]')
         .forEach(w => wrappers[w.dataset.filterKey] = w);
 
 
 
-    /* ─────────────────────── 2. help‑функции ─────────────────────── */
+    
 
-    /* подсветка активного пункта + текст на кнопке */
+    
     function setFilterUI(key, text, value = null) {
         const wrap = wrappers[key];
         if (!wrap) return;
@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         items.forEach(a => {
             const active = value !== null && a.dataset.value === String(value);
-            a.classList.toggle('bg-purple-600', active);
+            a.classList.toggle('bg-indigo-600', active);
             a.classList.toggle('text-white', active);
         });
 
-        btn.classList.toggle('bg-purple-600', value !== null);
+        btn.classList.toggle('bg-indigo-600', value !== null);
         btn.classList.toggle('text-white', value !== null);
         btn.querySelector('.filter-label').textContent = text;
     }
@@ -36,15 +36,15 @@ document.addEventListener('DOMContentLoaded', () => {
         let uniq;
 
         if (!filters.purpose) {
-            // ✅ Если не выбрано назначение — используем defaultAreas
+           
             uniq = [...defaultAreas];
         } else {
-            // ✅ Если выбрано назначение — строим по реальным данным
+           
             const src = dataByPurpose[filters.purpose].map(o => o.area);
             uniq = [...new Set(src)].sort((a, b) => a - b);
         }
 
-        // Фильтруем по min / max, если они заданы
+       
         if (limitKey !== 'minArea' && filters.minArea)
             uniq = uniq.filter(v => v >= +filters.minArea);
         if (limitKey !== 'maxArea' && filters.maxArea)
@@ -58,10 +58,10 @@ document.addEventListener('DOMContentLoaded', () => {
             menu.innerHTML = uniq
                 .map(v => `
         <li><a href="#" data-value="${v}"
-               class="block px-4 py-2 hover:bg-purple-400">${v}&nbsp;м²</a></li>`
+               class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">${v}&nbsp;м²</a></li>`
                 ).join('');
 
-            bindItemHandlers(menu, key); // навешиваем клики
+            bindItemHandlers(menu, key);
         });
     }
 
@@ -71,20 +71,20 @@ document.addEventListener('DOMContentLoaded', () => {
         const val = a.dataset.value;
         const label = a.textContent.trim();
 
-        // Снятие фильтра
+       
         if (filters[key] === val) {
             filters[key] = null;
             setFilterUI(key, wrappers[key].querySelector('.filter-toggle').dataset.placeholder);
-            rebuildAreaOptions(); // ✅ перерисовываем оба списка
+            rebuildAreaOptions();
             menu.classList.add('hidden');
             return;
         }
 
-        // Установка фильтра
+       
         filters[key] = val;
         setFilterUI(key, label, val);
 
-        // Правило min ≤ max
+       
         if (key === 'minArea' && filters.maxArea && +val > +filters.maxArea) {
             filters.maxArea = null;
             setFilterUI('maxArea', wrappers.maxArea.querySelector('.filter-toggle').dataset.placeholder);
@@ -94,25 +94,25 @@ document.addEventListener('DOMContentLoaded', () => {
             setFilterUI('minArea', wrappers.minArea.querySelector('.filter-toggle').dataset.placeholder);
         }
 
-        rebuildAreaOptions(); // ✅ перерисовываем оба списка с учётом новых фильтров
+        rebuildAreaOptions();
         menu.classList.add('hidden');
     }
 
 
-    /* поставить клики на пункты меню (используем много раз) */
+    
     function bindItemHandlers(menu, key) {
         menu.querySelectorAll('a').forEach(a => {
             a.addEventListener('click', e => handleItemClick(e, key, a, menu));
         });
     }
 
-    /* вешаем обработчики на конкретный dropdown */
+    
     function bindMenuHandlers(wrap) {
         const key = wrap.dataset.filterKey;
         const btn = wrap.querySelector('.filter-toggle');
         const menu = wrap.querySelector('.filter-options');
 
-        /* открыть / закрыть выпадашку */
+        
         btn.addEventListener('click', e => {
             e.stopPropagation();
             const open = !menu.classList.contains('hidden');
@@ -121,19 +121,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!open) menu.classList.remove('hidden');
         });
 
-        /* клики по пунктам */
+        
         menu.querySelectorAll('a').forEach(a => {
             a.addEventListener('click', e => {
                 e.preventDefault();
                 const val = a.dataset.value;
                 const label = a.textContent.trim();
 
-                /* ───── 2.1 снять фильтр ───── */
+                
                 if (filters[key] === val) {
                     filters[key] = null;
                     setFilterUI(key, btn.dataset.placeholder);
 
-                    if (key === 'purpose') {               // убрали назначение
+                    if (key === 'purpose') {              
                         filters.minArea = filters.maxArea = null;
                         rebuildAreaOptions();
                         setFilterUI('minArea', wrappers.minArea.querySelector('.filter-toggle').dataset.placeholder);
@@ -143,11 +143,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                /* ───── 2.2 выбрать новое ───── */
+                
                 filters[key] = val;
                 setFilterUI(key, label, val);
 
-                /* авто‑подставляем min/max по назначению */
+                
                 if (key === 'purpose') {
                     rebuildAreaOptions();
                     const arr = dataByPurpose[val].map(o => o.area);
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     setFilterUI('maxArea', `${maxV} м²`, maxV);
                 }
 
-                /* правило min ≤ max */
+                
                 if (key === 'minArea' && filters.maxArea && +val > +filters.maxArea) {
                     filters.maxArea = null;
                     setFilterUI('maxArea', wrappers.maxArea.querySelector('.filter-toggle').dataset.placeholder);
@@ -174,15 +174,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* ─────────────────────── 3. инициализация ─────────────────────── */
+    
 
-    /* вешаем обработчики на все четыре выпадашки */
+    
     Object.values(wrappers).forEach(bindMenuHandlers);
 
-    /* первый рендер списков площадей (покажет defaultAreas) */
+    
     rebuildAreaOptions();
 
-    /* кнопка «Показать предложения» */
+    
     const showBtn = document.querySelector('.show-results');
     if (showBtn) {
         showBtn.addEventListener('click', () => {
@@ -192,10 +192,86 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    /* кликом по пустому месту закрываем любое открытое меню */
+    
     document.addEventListener('click', () => {
         document.querySelectorAll('.filter-options:not(.hidden)')
             .forEach(m => m.classList.add('hidden'));
     });
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  const form   = document.getElementById('contactForm');
+  const fields = {
+    name  : document.getElementById('name'),
+    phone : document.getElementById('phone'),
+    email : document.getElementById('email')
+  };
+
+  
+  const isNameValid  = v => /^[\p{L}\s'-]+$/u.test(v.trim());
+  const isPhoneValid = v => /^(\+?\d[\d\s\-]{7,})$/.test(v.trim());
+  const isEmailValid = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+
+  
+  function showError(input, message) {
+    clearError(input);
+    input.classList.add('border-red-500', 'ring-2', 'ring-red-500');
+
+    const p = document.createElement('p');
+    p.className = 'mt-1 text-sm text-red-500';
+    p.textContent = message;
+    input.parentNode.appendChild(p);
+  }
+
+  function clearError(input) {
+    input.classList.remove('border-red-500', 'ring-2', 'ring-red-500');
+    input.parentNode.querySelectorAll('p.mt-1.text-sm.text-red-500')
+         .forEach(el => el.remove());
+  }
+
+  
+  function validateField(input) {
+    const val = input.value.trim();
+    clearError(input);
+
+    switch (input.id) {
+      case 'name':
+        if (!val)           { showError(input, 'Поле обязательно для заполнения'); return false; }
+        if (!isNameValid(val)) { showError(input, 'Имя должно содержать только буквы'); return false; }
+        break;
+
+      case 'phone':
+        if (!val)             { showError(input, 'Поле обязательно'); return false; }
+        if (!isPhoneValid(val)) { showError(input, 'Введите корректный телефон'); return false; }
+        break;
+
+      case 'email':
+        if (val && !isEmailValid(val)) {
+          showError(input, 'Введите корректный e-mail'); return false;
+        }
+        break;
+    }
+    return true;
+  }
+
+  
+  Object.values(fields).forEach(input => {
+    input.addEventListener('blur',  () => validateField(input));
+    input.addEventListener('input', () => validateField(input));
+  });
+
+  
+  form.addEventListener('submit', e => {
+    const invalid = Object.values(fields).some(f => !validateField(f));
+    if (invalid) {
+      e.preventDefault();
+      form.querySelector('.border-red-500')?.scrollIntoView({
+        behavior:'smooth', block:'center'
+      });
+    }
+  });
+
 });
 
