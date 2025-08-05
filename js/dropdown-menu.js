@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function show() { menu.classList.remove('hidden') }
     function hide() { menu.classList.add('hidden') }
 
-    // наводим/уходим с кнопки и с самого меню
+   
     dropdown.addEventListener('mouseenter', show);
     dropdown.addEventListener('mouseleave', hide);
     menu.addEventListener('mouseenter', show);
