@@ -51,3 +51,42 @@ html {
   background: #374151;
   transition: all 0.3s;
 }
+
+
+
+#adSlider {
+    height: 300px; /* Задай нужную высоту слайдера */
+}
+
+#adSlides {
+    height: 100%;
+    width: 100%;
+}
+
+/* Скрываем кнопки на мобильных устройствах */
+@media (max-width: 1023px) {
+    #adPrev, #adNext {
+        display: none;
+    }
+}
+
+/* Корректное масштабирование слайдов */
+@media (max-width: 1023px) {
+    #adSlides > div {
+        width: 100% !important;
+    }
+}
+
+
+@media (max-width: 1023px) {
+    #adSlides {
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+    }
+
+    #adSlides > div {
+        scroll-snap-align: start;
+    }
+}
+
