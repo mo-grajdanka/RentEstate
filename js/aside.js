@@ -8,9 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // Показываем первые 4 или sitesData.slice(0,4)
+ 
   siteList.innerHTML = sitesData.slice(0, 4).map(site => {
-    // Только place в URL
+   
     const listUrl = `pages/list.html?place=${encodeURIComponent(site.place)}`;
     return `
       <div class="property-card bg-white rounded-lg overflow-hidden shadow-md">
