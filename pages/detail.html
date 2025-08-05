@@ -7,22 +7,22 @@
   <title id="page-title">(Лого) Название компании</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <link rel="stylesheet" href="../style/style.css">
-  <script defer src="../js/modal.js"></script>
-  <script defer src="../js/script.js"></script>
+  <link rel="stylesheet" href="/style/style.css">
+  <script defer src="/js/modal.js"></script>
+  <script defer src="/js/script.js"></script>
 </head>
 
 <body class="flex flex-col min-h-screen bg-gray-50 font-sans">
   <script src="data.js"></script>
-  <!-- Header -->
+  
   <header class="bg-gray-100 sticky top-0 z-50 shadow-md">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center">
-        <!-- <div class="text-2xl font-bold text-blue-600">RE</div> -->
+        
         <div class="ml-2 text-xl font-semibold">(Лого) Название компании</div>
       </div>
 
-      <!-- мобильное меню -->
+      
       <nav id="mobileMenu" class="hidden fixed inset-x-0 top-16 bg-white shadow-md py-4 px-6 space-y-4">
         <a href="#" class="block text-gray-700 hover:text-blue-600">Недвижимость</a>
         <a href="#" class="block text-gray-700 hover:text-blue-600">Услуги</a>
@@ -40,9 +40,6 @@
           <a href="tel:+71231232827" class="text-gray-700 hover:text-blue-600">+7 (123) 123–28–27</a>
         </div>
 
-        <!-- <button class="md:hidden text-gray-700">
-                    <i class="fas fa-bars text-xl"></i>
-                </button> -->
         <button id="burger" class="text-gray-700 hamburger-menu flex flex-col gap-1 p-2 cursor-pointer">
           <span class="block w-5 h-0.5 bg-gray-700 transition-all duration-300"></span>
           <span class="block w-5 h-0.5 bg-gray-700 transition-all duration-300"></span>
@@ -119,7 +116,7 @@
   </script>
 
   <main class="flex-grow container mx-auto px-4 py-8">
-    <!-- Breadcrumbs -->
+    
     <nav class="text-sm text-gray-500 mb-4" aria-label="breadcrumb">
       <ol class="inline-flex list-none p-0">
         <li class="flex items-center">
@@ -134,7 +131,7 @@
       </ol>
     </nav>
 
-    <!-- Slider -->
+    
     <div class="relative bg-white rounded-lg shadow overflow-hidden mb-8">
       <img id="main-img" src="" alt="" class="w-full h-[200px] sm:h-[400px] object-cover">
       <button id="prev" class="hidden sm:block absolute left-2 top-1/2 transform -translate-y-1/2
@@ -147,7 +144,7 @@
       </button>
     </div>
 
-    <!-- Details + Expert -->
+    
     <div class="grid lg:grid-cols-3 gap-6 mb-12">
       <section class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6">
         <h1 id="item-name" class="text-3xl font-bold mb-2"></h1>
@@ -163,27 +160,20 @@
           <h2 class="text-xl font-semibold mb-3">Возможные бизнесы</h2>
           <p id="item-suitable-for" class="text-gray-700 mb-3">Информация отсутствует.</p>
         </div>
-
-        <!-- Верхняя часть: Описание -->
-        <!-- <div class="t-layout-description">
-            <h2 class="text-xl font-semibold mb-3">Описание</h2>
-            <p id="item-description" class="text-gray-700"></p>
-        </div> -->
-
-        <!-- Разделитель -->
+        
         <hr class="t-layout-divider">
 
 
-        <!-- Нижняя часть: Характеристики и Технические характеристики -->
-        <!-- Используем grid для создания двух колонок на средних экранах и больше -->
+        
+        
         <div class="grid md:grid-cols-2 gap-6 mt-6">
-          <!-- Левая колонка: Характеристики -->
+          
           <div>
             <h3 class="text-lg font-medium mb-3">Характеристики</h3>
             <ul id="item-characteristics-list" class="list-disc list-inside text-gray-700 space-y-1"></ul>
           </div>
 
-          <!-- Правая колонка: Технические характеристики (с левой границей-разделителем на md+) -->
+          
           <div class="md:border-l md:border-gray-300 md:pl-6">
             <h3 class="text-lg font-medium mb-3">Технические характеристики</h3>
             <ul id="item-technical-characteristics-list" class="list-disc list-inside text-gray-700 space-y-1"></ul>
@@ -207,21 +197,21 @@
       </aside>
     </div>
 
-    <!-- Related -->
+    
     <section class="mb-12">
       <h2 class="text-xl font-semibold mb-4">Вас могут заинтересовать</h2>
       <div id="related" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
     </section>
   </main>
 
-  <!-- Footer -->
+  
   <footer class="mt-auto bg-gray-900 text-gray-300 pt-16 pb-8">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-        <!-- Column 1 -->
+        
         <div>
           <div class="flex items-center mb-4">
-            <!-- <div class="text-2xl font-bold text-white">RE</div> -->
+            
             <div class="ml-2 text-xl font-semibold text-white">(Лого) Название компании</div>
           </div>
           <p class="mb-4">
@@ -235,23 +225,23 @@
           </div>
         </div>
 
-        <!-- Column 2 -->
+        
         <div>
           <h3 class="text-white text-lg font-semibold mb-4">Недвижимость</h3>
           <ul class="space-y-2">
-            <!-- <li><a href="#" class="hover:text-white">Квартиры</a></li> -->
-            <!-- <li><a href="#" class="hover:text-white">Дома</a></li> -->
+            
+            
             <li><a href="#" class="hover:text-white">Офисы</a></li>
             <li><a href="#" class="hover:text-white">Коммерческая недвижимость</a></li>
-            <!-- <li><a href="#" class="hover:text-white">Новостройки</a></li> -->
+            
           </ul>
         </div>
 
-        <!-- Column 3 -->
+        
         <div>
           <h3 class="text-white text-lg font-semibold mb-4">Услуги</h3>
           <ul class="space-y-2">
-            <!-- <li><a href="#" class="hover:text-white">Аренда жилья</a></li> -->
+            
             <li><a href="#" class="hover:text-white">Аренда офисов</a></li>
             <li><a href="#" class="hover:text-white">Юридические услуги</a></li>
             <li><a href="#" class="hover:text-white">Оценка недвижимости</a></li>
@@ -259,7 +249,7 @@
           </ul>
         </div>
 
-        <!-- Column 4 -->
+        
         <div>
           <h3 class="text-white text-lg font-semibold mb-4">Контакты</h3>
           <ul class="space-y-2">
@@ -298,13 +288,13 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // Hamburger
+      
       document.querySelector('.hamburger-menu').onclick = () => {
         document.getElementById('mobileMenu').classList.toggle('hidden');
       };
 
 
-      // 2) Read params
+      
       const params = new URLSearchParams(window.location.search);
       const purpose = params.get('purpose') || 'land';
       const id = +params.get('id');
@@ -314,7 +304,7 @@
         throw '';
       }
 
-      // 3) Fill header & breadcrumbs
+      
       const labels = {
         land: 'Земельные участки',
         office: 'Офисные помещения',
@@ -335,21 +325,21 @@
           ? `Этаж: ${item.floor}`
           : '';
       const features = [];
-      // Всегда есть площадь
+      
       features.push(`Площадь: ${item.area} м²`);
-      // Если есть площадка (land), выводим
+      
       if (item.place) {
         features.push(`Площадка: ${item.place}`);
       }
-      // Если офис — этаж
+      
       if (item.floor !== undefined) {
         features.push(`Этаж: ${item.floor}`);
       }
-      // вставляем список
+      
       const ul = document.getElementById('item-features');
       ul.innerHTML = features.map(f => `<li>${f}</li>`).join('');
 
-      // 4) Slider
+      
       const imgs = item.images;
       let idx = 0;
       const imgEl = document.getElementById('main-img');
@@ -358,11 +348,11 @@
         imgEl.src = imgs[idx];
       }
 
-      // Автопрокрутка
+      
       const AUTO_DELAY = 3000;
       let autoTimer = setInterval(() => show(idx + 1), AUTO_DELAY);
 
-      // Инициализация стрелок
+      
       document.getElementById('prev').addEventListener('click', () => {
         clearInterval(autoTimer);
         show(idx - 1);
@@ -374,12 +364,12 @@
         autoTimer = setInterval(() => show(idx + 1), AUTO_DELAY);
       });
 
-      // Показываем первый
+      
       show(0);
 
 
 
-      // 5) Related
+      
       const related = document.getElementById('related');
       dataByPurpose[purpose]
         .filter(x => x.id !== id)
@@ -392,7 +382,7 @@
   <img src="${x.images[0] || x.img}" alt="${x.name}" class="w-full h-32 object-cover">
   <div class="p-4">
     <h3 class="font-semibold mb-1">${x.name}</h3>
-    <!-- теперь показываем площадь -->
+    
     <p class="text-gray-600 text-sm mb-2">Площадь: ${x.area} м²</p>
     <p class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
       Подробнее <i class="fas fa-arrow-right ml-2"></i>
@@ -406,8 +396,8 @@
 
 
 
-      // --- 7. Заполнение основной секции деталей ---
-      // --- Верхняя часть: Описание ---
+      
+      
       const descriptionElement = document.getElementById('item-description');
       if (descriptionElement) {
         descriptionElement.textContent = item.description || 'Описание отсутствует.';
@@ -423,14 +413,14 @@
         }
       }
 
-      // --- Нижняя часть: Характеристики и Технические характеристики ---
+      
       const characteristicsList = document.getElementById('item-characteristics-list');
       if (characteristicsList) {
-        characteristicsList.innerHTML = ''; // Очищаем перед заполнением
+        characteristicsList.innerHTML = ''; 
         if (item.characteristics && Array.isArray(item.characteristics) && item.characteristics.length > 0) {
           item.characteristics.forEach(char => {
             const li = document.createElement('li');
-            // Формат: "Название: Значение". Добавляем проверку на существование label и value.
+            
             li.textContent = char.label && char.value ? `${char.label}: ${char.value}` : 'Некорректные данные';
             characteristicsList.appendChild(li);
           });
@@ -443,11 +433,11 @@
 
       const technicalCharacteristicsList = document.getElementById('item-technical-characteristics-list');
       if (technicalCharacteristicsList) {
-        technicalCharacteristicsList.innerHTML = ''; // Очищаем перед заполнением
+        technicalCharacteristicsList.innerHTML = ''; 
         if (item.technicalCharacteristics && Array.isArray(item.technicalCharacteristics) && item.technicalCharacteristics.length > 0) {
           item.technicalCharacteristics.forEach(char => {
             const li = document.createElement('li');
-            // Формат: "Название: Значение". Добавляем проверку на существование label и value.
+            
             li.textContent = char.label && char.value ? `${char.label}: ${char.value}` : 'Некорректные данные';
             technicalCharacteristicsList.appendChild(li);
           });
@@ -462,7 +452,7 @@
   </script>
 
 
-  <!-- Modal -->
+  
   <div id="modal" class="modal fixed inset-0 z-50 flex items-center justify-center hidden">
     <div class="modal-overlay absolute inset-0"></div>
     <div class="modal-container bg-white w-full max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
@@ -474,7 +464,7 @@
           </button>
         </div>
 
-        <form class="space-y-4">
+        <form id="contactForm" class="space-y-4">
           <div>
             <label for="name" class="block text-gray-700 mb-1">Имя <span class="text-red-500">*</span></label>
             <input type="text" id="name"
@@ -526,5 +516,3 @@
 </body>
 
 </html>
-
-
