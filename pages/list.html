@@ -15,7 +15,7 @@
 
 <body class="flex flex-col min-h-screen bg-gray-50 font-sans">
   <script src="data.js"></script>
-  <script src="filters.js"></script>
+  <!-- <script src="filters.js"></script> -->
   <!-- Header -->
     <header class="bg-gray-100 sticky top-0 z-50 shadow-md">
         <div class="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -25,7 +25,7 @@
             </div>
 
             <!-- мобильное меню -->
-            <nav id="mobileMenu" class="hidden fixed inset-x-0 top-16 bg-white shadow-md py-4 px-6 space-y-4">
+             <nav id="mobileMenu" class="hidden fixed top-16 right-0 w-64 bg-white shadow-md py-4 px-6 space-y-4">
                 <a href="#" class="block text-gray-700 hover:text-blue-600">Недвижимость</a>
                 <a href="#" class="block text-gray-700 hover:text-blue-600">Услуги</a>
                 <a href="#" class="block text-gray-700 hover:text-blue-600">Компания</a>
@@ -142,23 +142,22 @@
     <section class="container mx-auto mb-6">
       <div class="flex flex-wrap gap-4">
         <!-- Фильтр: Площадка -->
-        <div class="relative" data-filter-key="place">
+        <div class="relative inline-block" data-filter-key="place">
           <button
             class="filter-toggle flex items-center gap-2 px-4 py-2
            bg-gray-100 text-gray-700 hover:bg-indigo-600 hover:text-white transition
            border border-gray-300 border-r-0 rounded-none"
-            data-placeholder="Площадка"> <!-- data-placeholder для сброса -->
+            data-placeholder="Площадка"> 
             <span class="filter-label">Площадка</span>
             <i class="fas fa-chevron-down"></i>
           </button>
-          <ul class="filter-options hidden absolute left-0 mt-2 bg-white rounded-lg shadow-lg py-2 w-64">
-            <!-- Пункты будут генерироваться скриптом -->
-            <!-- Добавим пункт "Все площадки" программно -->
+          <ul class="filter-options hidden absolute left-0 mt-2 bg-white rounded-lg shadow-lg py-2 w-full z-50">
+            
           </ul>
         </div>
 
         <!-- Фильтр: Назначение -->
-        <div class="relative" data-filter-key="purpose">
+        <div class="relative inline-block" data-filter-key="purpose">
           <button
             class="filter-toggle flex items-center gap-2 px-4 py-2
            bg-gray-100 text-gray-700 hover:bg-indigo-600 hover:text-white transition
@@ -167,31 +166,30 @@
             <span class="filter-label">Назначение</span>
             <i class="fas fa-chevron-down"></i>
           </button>
-          <ul class="filter-options hidden absolute left-0 mt-2 bg-white rounded-lg shadow-lg py-2">
-            <!-- Пункты будут генерироваться скриптом -->
+          <ul class="filter-options hidden absolute left-0 mt-2 bg-white rounded-lg shadow-lg py-2 w-full z-50">
           </ul>
         </div>
 
         <!-- Фильтр: Площадь от -->
-        <div class="relative" data-filter-key="minArea">
+        <div class="relative inline-block" data-filter-key="minArea">
           <button class="filter-toggle flex items-center gap-2 px-4 py-2
            bg-gray-100 text-gray-700 hover:bg-indigo-600 hover:text-white transition
            border border-gray-300 border-r-0 rounded-none">
             <span class="filter-label"></span>
             <i class="fas fa-chevron-down"></i>
           </button>
-          <ul class="filter-options absolute bg-white shadow rounded mt-2 py-2 w-36"></ul>
+          <ul class="filter-options absolute left-0 mt-2 bg-white shadow rounded py-2 w-full z-50"></ul>
         </div>
 
         <!-- Фильтр: Площадь до -->
-        <div class="relative" data-filter-key="maxArea">
+        <div class="relative inline-block" data-filter-key="maxArea">
           <button class="filter-toggle flex items-center gap-2 px-4 py-2
            bg-gray-100 text-gray-700 hover:bg-indigo-600 hover:text-white transition
            border border-gray-300 border-r-0 rounded-none">
             <span class="filter-label"></span>
             <i class="fas fa-chevron-down"></i>
           </button>
-          <ul class="filter-options absolute bg-white shadow rounded mt-2 py-2 w-36"></ul>
+          <ul class="filter-options absolute left-0 mt-2 bg-white shadow rounded py-2 w-full z-50"></ul>
         </div>
       </div>
       </div>
@@ -296,480 +294,407 @@
       </div>
     </div>
   </footer>
+<script>
+// 1. Маппинг названий назначения
+const labels = {
+  land:       'Земельные участки',
+  office:     'Офисные помещения',
+  warehouse:  'Складские помещения',
+  production: 'Производственные',
+  retail:     'Торговые площади'
+};
 
-  <script>
-    
-    document.querySelector('.hamburger-menu').onclick = () => {
-      const m = document.getElementById('mobileMenu');
-      m.classList.toggle('hidden');
-    };
-    
-    
-    
+// 2. Обновление хлебных крошек и заголовка
+function updateBreadcrumbAndHeading(purpose) {
+  const bc = document.getElementById('bc-list');
+  const h1 = document.getElementById('page-title-heading');
+  if (purpose && labels[purpose]) {
+    bc.textContent = labels[purpose];
+    h1.textContent = labels[purpose];
+    document.title = labels[purpose];
+  } else {
+    bc.textContent = 'Результаты поиска';
+    h1.textContent = 'Результаты поиска';
+    document.title = 'Результаты поиска';
+  }
+}
 
-    
-    document.addEventListener('DOMContentLoaded', () => {
-      
-      const url = new URL(location);
-      const purposeFromUrl = url.searchParams.get('purpose'); 
-      const filters = {
-        purpose: url.searchParams.get('purpose'),
-        place: url.searchParams.get('place'),
-        minArea: url.searchParams.get('minArea'),
-        maxArea: url.searchParams.get('maxArea')
-      };
+// 3. Бургер-меню
+const burger = document.querySelector('.hamburger-menu');
+if (burger) {
+  burger.addEventListener('click', () => {
+    document.getElementById('mobileMenu').classList.toggle('hidden');
+    burger.classList.toggle('active');
+  });
+}
 
-      const suitableFilters = url.searchParams.getAll('suitableFor')
-        .map(decodeURIComponent)
-        .filter(s => s);
+// 18. Слайдер автопрокрутка и кнопки
+function initEmptySlider() {
+  const slider = document.querySelector('.overflow-x-auto');
+  if (!slider) return;
+  const cards = slider.querySelectorAll('.w-64');
+  // Если карточек меньше 2 — убираем прокрутку
+  if (cards.length <= 1) {
+    slider.style.overflow = 'hidden';
+    return;
+  }
 
-      
-      const labels = {
-        land: 'Земельные участки',
-        office: 'Офисные помещения',
-        warehouse: 'Складские помещения',
-        production: 'Производственные',
-        retail: 'Торговые площади'
-      };
+  const cardWidth = cards[0].offsetWidth + 16; // +gap
+  let pos = 0;
 
-      
-      let dataToShow = [];
-      if (purposeFromUrl && dataByPurpose[purposeFromUrl]) {
-        
-        dataToShow = dataByPurpose[purposeFromUrl];
-        document.getElementById('bc-list').textContent = labels[purposeFromUrl];
-        document.getElementById('page-title-heading').textContent = labels[purposeFromUrl];
-        document.title = labels[purposeFromUrl];
-      } else {
-        
-        dataToShow = Object.values(dataByPurpose).flat();
-        document.getElementById('bc-list').textContent = 'Результаты поиска';
-        document.getElementById('page-title-heading').textContent = 'Результаты поиска';
-        document.title = 'Результаты поиска';
+  // Автопрокрутка каждые 4 секунды
+  setInterval(() => {
+    pos = (pos + cardWidth >= slider.scrollWidth - slider.clientWidth)
+      ? 0
+      : pos + cardWidth;
+    slider.scrollTo({ left: pos, behavior: 'smooth' });
+  }, 4000);
+
+  // Кнопки «‹» и «›»
+  const nav = document.createElement('div');
+  nav.className = 'absolute top-1/2 left-0 right-0 flex justify-between items-center pointer-events-none';
+
+  const btnPrev = document.createElement('button');
+  btnPrev.innerHTML = '&#10094;'; // ‹
+  btnPrev.className = 'pointer-events-auto bg-white rounded-full p-2 shadow';
+
+  const btnNext = document.createElement('button');
+  btnNext.innerHTML = '&#10095;'; // ›
+  btnNext.className = 'pointer-events-auto bg-white rounded-full p-2 shadow';
+
+  nav.append(btnPrev, btnNext);
+  slider.parentElement.style.position = 'relative';
+  slider.parentElement.append(nav);
+
+  btnPrev.addEventListener('click', () => {
+    pos = Math.max(0, pos - cardWidth);
+    slider.scrollTo({ left: pos, behavior: 'smooth' });
+  });
+  btnNext.addEventListener('click', () => {
+    pos = Math.min(slider.scrollWidth - slider.clientWidth, pos + cardWidth);
+    slider.scrollTo({ left: pos, behavior: 'smooth' });
+  });
+}
+document.addEventListener('DOMContentLoaded', initEmptySlider);
+// document.addEventListener('DOMContentLoaded', () => initEmptySlider());
+// 4. Инициализация после загрузки DOM
+document.addEventListener('DOMContentLoaded', () => {
+  const url = new URL(window.location);
+  const filters = {
+    purpose: url.searchParams.get('purpose') || '',
+    place:   url.searchParams.get('place')   || '',
+    minArea: url.searchParams.get('minArea') || '',
+    maxArea: url.searchParams.get('maxArea') || ''
+  };
+  const suitableFilters = url.searchParams.getAll('suitableFor')
+    .map(decodeURIComponent)
+    .filter(Boolean);
+
+  // Обновляем заголовок и хлебные крошки
+  updateBreadcrumbAndHeading(filters.purpose);
+
+  // Собираем данные для отображения
+  const dataToShow = filters.purpose && dataByPurpose[filters.purpose]
+    ? dataByPurpose[filters.purpose]
+    : Object.values(dataByPurpose).flat();
+
+  // 5. Авто-диапазон площадей
+  const uniqueAreas = Array.from(new Set(
+    dataToShow.map(i => Number(i.area)).filter(n => !isNaN(n))
+  )).sort((a, b) => a - b);
+  if (!filters.minArea && uniqueAreas.length) {
+    filters.minArea = String(uniqueAreas[0]);
+    url.searchParams.set('minArea', filters.minArea);
+  }
+  if (!filters.maxArea && uniqueAreas.length) {
+    filters.maxArea = String(uniqueAreas[uniqueAreas.length - 1]);
+    url.searchParams.set('maxArea', filters.maxArea);
+  }
+  history.replaceState(null, '', url);
+
+  // 6. Генерация опций фильтров
+  generatePurposeOptions();
+  buildPlaceOptions();
+  buildAreaOptions('minArea');
+  buildAreaOptions('maxArea');
+
+  // 7. Установка лейблов
+  updateFilterButtonLabels(filters);
+
+  // 8. Рендер и навешивание обработчиков
+  renderListings(filters, suitableFilters);
+  attachFilterHandlers(filters, url, suitableFilters);
+});
+
+// 9. Опции назначения
+function generatePurposeOptions() {
+  const wrapper = document.querySelector('[data-filter-key="purpose"] .filter-options');
+  if (!wrapper) return;
+  wrapper.innerHTML = Object.keys(dataByPurpose)
+    .map(k => `<li><a href='#' data-value='${k}' class='block px-4 py-2 hover:bg-purple-100'>${labels[k]}</a></li>`)
+    .join('');
+}
+
+// 10. Опции площадок
+function buildPlaceOptions() {
+  const wrapper = document.querySelector('[data-filter-key="place"] .filter-options');
+  if (!wrapper) return;
+  const all = Object.values(dataByPurpose).flat();
+  const places = Array.from(new Set(all.map(i => i.place))).filter(Boolean);
+  wrapper.innerHTML = places
+    .map(p => `<li><a href='#' data-value='${p}' class='block px-4 py-2 hover:bg-purple-100'>${p}</a></li>`)
+    .join('');
+}
+
+// 11. Опции площадей
+function buildAreaOptions(filterKey) {
+  const wrapper = document.querySelector(`[data-filter-key='${filterKey}'] .filter-options`);
+  if (!wrapper) return;
+  const all = Object.values(dataByPurpose).flat();
+  const areas = Array.from(new Set(all.map(i => Number(i.area)).filter(n => !isNaN(n)))).sort((a,b)=>a-b);
+  wrapper.innerHTML = areas
+    .map(a => `<li><a href='#' data-value='${a}' class='block px-4 py-2 hover:bg-purple-100'>${a} м²</a></li>`)
+    .join('');
+}
+
+// 12. Лейблы кнопок
+function updateFilterButtonLabels(filters) {
+  ['place','purpose','minArea','maxArea'].forEach(key => {
+    const wrapper = document.querySelector(`[data-filter-key='${key}']`);
+    if (!wrapper) return;
+    const btn = wrapper.querySelector('.filter-toggle');
+    const lbl = btn.querySelector('.filter-label');
+    const val = filters[key];
+    if (val) {
+      let text;
+      if (key === 'purpose') text = labels[val];
+      else if (key === 'minArea') text = `Площадь от ${val} м²`;
+      else if (key === 'maxArea') text = `Площадь до ${val} м²`;
+      else text = val;
+      lbl.textContent = text;
+      btn.classList.add('bg-indigo-600','text-white');
+    } else {
+      lbl.textContent = key==='minArea' ? 'Площадь от' : key==='maxArea' ? 'Площадь до' : btn.dataset.placeholder;
+      btn.classList.remove('bg-indigo-600','text-white');
+    }
+  });
+}
+function renderListings(filters, suitableFilters) {
+  const container = document.getElementById('listings');
+
+  // 1) Фильтрация списка
+  let list = filters.purpose && dataByPurpose[filters.purpose]
+    ? dataByPurpose[filters.purpose]
+    : Object.values(dataByPurpose).flat();
+  list = list.filter(item => {
+    if (filters.place && item.place !== filters.place) return false;
+    if (filters.minArea && +item.area < +filters.minArea) return false;
+    if (filters.maxArea && +item.area > +filters.maxArea) return false;
+    if (suitableFilters.length) {
+      if (!Array.isArray(item.suitableFor)) return false;
+      if (!item.suitableFor.some(s => suitableFilters.includes(s))) return false;
+    }
+    return true;
+  });
+  updateAreaFilterOptions(list, filters);
+
+  // 2) Если нет результатов — вставляем карусель "Похожее"
+  if (!list.length) {
+    const similar = filters.purpose && dataByPurpose[filters.purpose]
+      ? dataByPurpose[filters.purpose]
+      : [];
+
+    // Собираем HTML слайдов
+    const slidesHtml = similar.map(item => {
+      const url = `detail.html?purpose=${filters.purpose||'land'}&id=${item.id}`;
+      return `
+        <div class="slide flex-none">
+          <div class="bg-white rounded-lg shadow p-4 flex flex-col justify-between h-full">
+            <img src="${Array.isArray(item.images)?item.images[0]:item.images}"
+                 alt="${item.name}"
+                 class="w-full h-44 object-cover rounded mb-3"
+                 onerror="this.src='https://placehold.co/400x200?text=No+Image'">
+            <div class="text-center font-medium mb-2">${item.name}</div>
+            <p class="text-gray-600 text-sm mb-4 text-center">Площадь: ${item.area} м²</p>
+            <div class="text-right">
+              <a href="${url}" class="text-blue-600 hover:underline font-medium">Подробнее</a>
+            </div>
+          </div>
+        </div>`;
+    }).join('');
+
+    container.innerHTML = `
+      <div class="col-span-full w-full flex flex-col md:flex-row gap-6 p-6">
+        <div class="md:w-2/3 flex flex-col items-center text-center space-y-4">
+
+  <p class="text-2xl font-bold text-gray-800">По вашим критериям ничего не найдено</p>
+
+  <p class="text-gray-600">
+    Возможно, стоит расширить диапазон площадей или изменить область поиска. 
+    А пока наш менеджер может помочь подобрать альтернативные варианты под ваши задачи.
+  </p>
+
+  <button id="contactManagerBtn"
+          class="inline-flex items-center bg-gradient-to-r from-purple-600 to-indigo-600 
+                 hover:from-purple-700 hover:to-indigo-700 text-white font-medium 
+                 px-8 py-3 rounded-full shadow-lg transition-transform 
+                 transform hover:-translate-y-0.5">
+    <i class="fas fa-headset mr-2"></i>
+    Получить помощь менеджера
+  </button>
+</div>
+        <div class="md:w-1/3">
+          <h2 class="text-lg font-medium mb-4">Похожее</h2>
+          <div id="similar-slider-container" class="relative overflow-hidden">
+            <div id="similar-slider-track"
+                 class="inline-flex gap-4 transition-transform duration-500 ease-in-out">
+              ${slidesHtml}
+            </div>
+          </div>
+        </div>
+      </div>`;
+
+    // 3) Инициализация слайдера
+    setTimeout(() => {
+      const sliderContainer = document.getElementById('similar-slider-container');
+      const sliderTrack     = document.getElementById('similar-slider-track');
+      const slides          = sliderTrack.querySelectorAll('.slide');
+      const totalSlides     = slides.length;
+      if (totalSlides <= 1) return;
+
+      // вычисляем gap между слайдами
+      const style     = getComputedStyle(sliderTrack);
+      const gap       = parseFloat(style.gap) || 0;
+
+      let currentIndex = 0;
+      let containerW   = sliderContainer.clientWidth;
+      // задаём каждой .slide ровно ширину контейнера
+      slides.forEach(sl => sl.style.width = `${containerW}px`);
+
+      // общая ширина шага = ширина + gap
+      const stepWidth = containerW + gap;
+
+      // функция смещения
+      function updatePosition(idx) {
+        sliderTrack.style.transform = `translateX(${-idx * stepWidth}px)`;
       }
 
-      
-      
-      let allPossiblePlaces = [];
-      let allPossibleAreas = [];
+      // автопрокрутка
+      const intervalId = setInterval(() => {
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updatePosition(currentIndex);
+      }, 3000);
 
-      dataToShow.forEach(item => {
-        if (item.place && !allPossiblePlaces.includes(item.place)) {
-          allPossiblePlaces.push(item.place);
-        }
-        if (item.area !== undefined && !allPossibleAreas.includes(item.area)) {
-          allPossibleAreas.push(item.area);
-        }
+      // стрелки навигации
+      const nav = document.createElement('div');
+      nav.className = 'absolute inset-y-0 left-0 right-0 flex justify-between items-center pointer-events-none';
+      const btnPrev = document.createElement('button');
+      btnPrev.innerHTML = '&#10094;'; btnPrev.className = 'pointer-events-auto bg-white rounded-full p-2 shadow';
+      const btnNext = document.createElement('button');
+      btnNext.innerHTML = '&#10095;'; btnNext.className = 'pointer-events-auto bg-white rounded-full p-2 shadow';
+      nav.append(btnPrev, btnNext);
+      sliderContainer.append(nav);
+
+      btnPrev.addEventListener('click', () => {
+        clearInterval(intervalId);
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updatePosition(currentIndex);
       });
-      allPossibleAreas.sort((a, b) => a - b);
+      btnNext.addEventListener('click', () => {
+        clearInterval(intervalId);
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updatePosition(currentIndex);
+      });
 
-      
-      const placeFilterWrapper = document.querySelector(`[data-filter-key="place"] .filter-options`);
-      if (placeFilterWrapper) {
-        placeFilterWrapper.innerHTML = ''; 
-
-
-
-        
-        allPossiblePlaces.forEach(place => {
-          const li = document.createElement('li');
-          li.innerHTML = `<a href="#" data-value="${place}" class="block px-4 py-2 hover:bg-purple-100">${place}</a>`;
-          placeFilterWrapper.appendChild(li);
+      // пересчёт при ресайзе
+      window.addEventListener('resize', () => {
+        containerW = sliderContainer.clientWidth;
+        slides.forEach(sl => sl.style.width = `${containerW}px`);
+        const newStep = containerW + gap;
+        sliderTrack.style.transition = 'none';
+        sliderTrack.style.transform  = `translateX(${-currentIndex * newStep}px)`;
+        requestAnimationFrame(() => {
+          sliderTrack.style.transition = '';
         });
+      });
+    }, 0);
+
+    return;
+  }
+
+  // 4) Обычная отрисовка результатов
+  container.innerHTML = list.map(item => {
+    let p = filters.purpose;
+    if (!p) {
+      for (const k in dataByPurpose) {
+        if (dataByPurpose[k].includes(item)) { p = k; break; }
       }
-
-      
-      function buildAreaOptions(filterKey) {
-        const areaFilterWrapper = document.querySelector(`[data-filter-key="${filterKey}"] .filter-options`);
-        if (areaFilterWrapper) {
-          areaFilterWrapper.innerHTML = allPossibleAreas.map(area => `
-        <li><a href="#" data-value="${area}" class="block px-4 py-2 hover:bg-purple-100">${area} м²</a></li>
-      `).join('');
-          
-          const anyOption = document.createElement('li');
-          const labelText = filterKey === 'minArea' ? 'Любая от' : 'Любая до';
-          anyOption.innerHTML = `<a href="#" data-value="" class="block px-4 py-2 hover:bg-purple-100 font-medium">${labelText}</a>`;
-          areaFilterWrapper.insertBefore(anyOption, areaFilterWrapper.firstChild);
-        }
-      }
-      buildAreaOptions('minArea');
-      buildAreaOptions('maxArea');
-      generatePurposeOptions();
-
-      
-      function updateFilterButtonLabels() {
-        
-        const placeWrapper = document.querySelector(`[data-filter-key="place"]`);
-        if (placeWrapper) {
-          const placeButton = placeWrapper.querySelector('.filter-toggle .filter-label');
-          const placeholder = placeWrapper.querySelector('.filter-toggle').dataset.placeholder || 'Площадка';
-          if (filters.place && filters.place !== "") {
-            const selectedOption = placeWrapper.querySelector(`.filter-options a[data-value="${filters.place}"]`);
-            if (selectedOption) {
-              placeButton.textContent = selectedOption.textContent;
-              placeWrapper.querySelector('.filter-toggle').classList.add('bg-indigo-600', 'text-white');
-            } else {
-              placeButton.textContent = placeholder;
-              placeWrapper.querySelector('.filter-toggle').classList.remove('bg-indigo-600', 'text-white');
-            }
-          } else {
-            placeButton.textContent = placeholder;
-            placeWrapper.querySelector('.filter-toggle').classList.remove('bg-indigo-600', 'text-white');
-          }
-        }
-
-        
-        const purposeWrapper = document.querySelector(`[data-filter-key="purpose"]`);
-        if (purposeWrapper) {
-          const purposeButton = purposeWrapper.querySelector('.filter-toggle .filter-label');
-          const placeholder = purposeWrapper.querySelector('.filter-toggle').dataset.placeholder || 'Любое назначение';
-          if (filters.purpose && filters.purpose !== "") {
-            
-            const purposeLabels = {
-              land: 'Земельные участки',
-              office: 'Офисные помещения',
-              warehouse: 'Складские помещения',
-              production: 'Производственные',
-              retail: 'Торговые площади'
-            };
-            const selectedLabel = purposeLabels[filters.purpose] || filters.purpose;
-            purposeButton.textContent = selectedLabel;
-            purposeWrapper.querySelector('.filter-toggle').classList.add('bg-indigo-600', 'text-white');
-          } else {
-            purposeButton.textContent = placeholder;
-            purposeWrapper.querySelector('.filter-toggle').classList.remove('bg-indigo-600', 'text-white');
-          }
-        }
-
-        
-        const minAreaWrapper = document.querySelector(`[data-filter-key="minArea"]`);
-        if (minAreaWrapper) {
-          const minAreaButton = minAreaWrapper.querySelector('.filter-toggle .filter-label');
-          const minAll = Math.min(...allPossibleAreas);
-          if (filters.minArea !== null && filters.minArea !== "") {
-            minAreaButton.textContent = `От ${filters.minArea} м²`;
-            minAreaWrapper.querySelector('.filter-toggle').classList.add('bg-indigo-600', 'text-white');
-          } else {
-            minAreaButton.textContent = `От ${minAll} м²`;
-            minAreaWrapper.querySelector('.filter-toggle').classList.remove('bg-indigo-600', 'text-white');
-          }
-        }
-
-        
-        const maxAreaWrapper = document.querySelector(`[data-filter-key="maxArea"]`);
-        if (maxAreaWrapper) {
-          const maxAreaButton = maxAreaWrapper.querySelector('.filter-toggle .filter-label');
-          const maxAll = Math.max(...allPossibleAreas);
-          if (filters.maxArea !== null && filters.maxArea !== "") {
-            maxAreaButton.textContent = `До ${filters.maxArea} м²`;
-            maxAreaWrapper.querySelector('.filter-toggle').classList.add('bg-indigo-600', 'text-white');
-          } else {
-            maxAreaButton.textContent = `До ${maxAll} м²`;
-            maxAreaWrapper.querySelector('.filter-toggle').classList.remove('bg-indigo-600', 'text-white');
-          }
-        }
-      }
-      updateFilterButtonLabels();
-
-
-      
-      function renderListings() {
-
-        let effectiveDataToShow = dataToShow; 
-        if (filters.purpose && dataByPurpose[filters.purpose]) {
-
-          effectiveDataToShow = dataByPurpose[filters.purpose];
-        }
-        
-        
-        const filteredData = effectiveDataToShow.filter(item => {
-          
-          if (filters.place && filters.place !== "" && item.place !== filters.place) {
-            return false;
-          }
-
-          
-          
-
-
-          
-          if (filters.minArea !== null && filters.minArea !== "" && item.area < Number(filters.minArea)) {
-            return false;
-          }
-          
-          if (filters.maxArea !== null && filters.maxArea !== "" && item.area > Number(filters.maxArea)) {
-            return false;
-          }
-
-          
-          if (suitableFilters.length > 0) {
-            
-            if (!Array.isArray(item.suitableFor)) return false;
-
-            
-            const hasMatch = item.suitableFor.some(serv =>
-              suitableFilters.includes(serv)
-            );
-            if (!hasMatch) return false;
-          }
-
-
-
-          return true;
-        });
-
-
-        if (typeof updateAreaFilterOptions === 'function') {
-          updateAreaFilterOptions(filteredData);
-        } else {
-          console.warn('Функция updateAreaFilterOptions не найдена. Списки фильтров площади не будут обновляться.');
-        }
-
-
-        
-        const container = document.getElementById('listings');
-        container.innerHTML = '';
-
-        if (filteredData.length === 0) {
-          container.innerHTML = '<p class="col-span-full text-center text-gray-500">По заданным критериям объекты не найдены.</p>';
-          return;
-        }
-
-        
-        filteredData.forEach(item => {
-          
-          let itemPurpose = purposeFromUrl;
-          if (!itemPurpose) {
-            for (const [key, items] of Object.entries(dataByPurpose)) {
-              if (items.includes(item)) {
-                itemPurpose = key;
-                break;
-              }
-            }
-          }
-
-          
-          const imageUrl = Array.isArray(item.images) ? item.images[0] : item.images;
-
-          const a = document.createElement('a');
-          a.href = `detail.html?purpose=${itemPurpose || 'land'}&id=${item.id}`;
-          a.className = 'block bg-white rounded-lg overflow-hidden shadow hover:shadow-lg transition';
-          a.innerHTML = `
-        <img src="${imageUrl}" alt="${item.name}" class="w-full h-32 object-cover" onerror="this.src='https://placehold.co/400x200?text=Image+Not+Found'">
+    }
+    const href = `detail.html?purpose=${p||'land'}&id=${item.id}`;
+    return `
+      <a href="${href}" class="block bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+        <img src="${Array.isArray(item.images)?item.images[0]:item.images}"
+             alt="${item.name}"
+             class="w-full h-32 object-cover"
+             onerror="this.src='https://placehold.co/400x200?text=Image+Not+Found'">
         <div class="p-4">
           <h3 class="font-semibold mb-1">${item.name}</h3>
-          <p class="text-gray-600 text-sm mb-2">Площадь: ${item.area} м²</p>
+          <p class="text-gray-600 text-sm mb-2">Площадь: ${item.area} м²</p>
           ${item.place ? `<p class="text-gray-500 text-xs mb-2">${item.place}</p>` : ''}
           <p class="text-blue-600 hover:text-blue-800 font-medium flex items-center">
             Подробнее <i class="fas fa-arrow-right ml-2"></i>
           </p>
-        </div>`;
-          container.appendChild(a);
-        });
+        </div>
+      </a>`;
+  }).join('');
+}
+
+
+
+// 14. Обновление опций площадей
+function updateAreaFilterOptions(filtered, filters) {
+  ['minArea','maxArea'].forEach(key => {
+    const menu = document.querySelector(`[data-filter-key='${key}'] .filter-options`);
+    if (!menu) return;
+    let vals = Array.from(new Set(filtered.map(i=>Number(i.area)).filter(n=>!isNaN(n)))).sort((a,b)=>a-b);
+    if (key==='minArea' && filters.maxArea) vals=vals.filter(a=>a<=Number(filters.maxArea));
+    if (key==='maxArea' && filters.minArea) vals=vals.filter(a=>a>=Number(filters.minArea));
+    menu.innerHTML = vals.map(a=>`<li><a href='#' data-value='${a}' class='block px-4 py-2 hover:bg-indigo-600 hover:text-white'>${a} м²</a></li>`).join('');
+  });
+}
+
+// 15. Обработчики фильтров
+function attachFilterHandlers(filters, url, suitableFilters) {
+  document.querySelectorAll('.relative[data-filter-key]').forEach(wrapper => {
+    const key=wrapper.dataset.filterKey;
+    const btn=wrapper.querySelector('.filter-toggle');
+    const menu=wrapper.querySelector('.filter-options');
+    btn.addEventListener('click',e=>{e.stopPropagation();document.querySelectorAll('.filter-options.show').forEach(m=>m.classList.remove('show'));menu.classList.toggle('show');});
+    menu.addEventListener('click',e=>{
+      const opt=e.target.closest('a[data-value]');if(!opt)return;e.preventDefault();
+      const val=opt.dataset.value;let reset=(val==='');if((key==='minArea'||key==='maxArea')&&filters[key]===val)reset=true;
+      if(reset)delete filters[key];else if(key==='purpose'){
+        filters.purpose=val;const items=dataByPurpose[val]||[];const areas=items.map(i=>Number(i.area)).filter(n=>!isNaN(n));
+        if(areas.length){filters.minArea=String(Math.min(...areas));filters.maxArea=String(Math.max(...areas));}
+        else{delete filters.minArea;delete filters.maxArea;}
+        updateFilterButtonLabels(filters);
+        updateAreaFilterOptions(items,filters);
+      }else{
+        filters[key]=val; if(filters.minArea&&filters.maxArea&&Number(filters.minArea)>Number(filters.maxArea)){delete filters.minArea;delete filters.maxArea;}
       }
-
-
-      
-      
-      function updateAreaFilterOptions(filteredData) {
-        if (!filteredData || !Array.isArray(filteredData)) {
-          console.error('updateAreaFilterOptions: filteredData должен быть массивом');
-          return;
-        }
-
-        
-        const uniqueAreasFromFilteredData = [...new Set(filteredData.map(item => {
-          
-          const area = item.area;
-          return (typeof area === 'number' || (typeof area === 'string' && !isNaN(area))) ? Number(area) : null;
-        }).filter(area => area !== null))].sort((a, b) => a - b);
-
-        
-        const minAreaMenu = document.querySelector('[data-filter-key="minArea"] .filter-options');
-        if (minAreaMenu) {
-          
-          let areasToShow = [...uniqueAreasFromFilteredData];
-          
-          if (filters.maxArea !== null && filters.maxArea !== "") {
-            const maxLimit = Number(filters.maxArea);
-            areasToShow = areasToShow.filter(area => area <= maxLimit);
-          }
-          
-          minAreaMenu.innerHTML = areasToShow.map(area => `
-        <li><a href="#" data-value="${area}" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">${area} м²</a></li>
-      `).join('');
-
-        }
-
-        
-        const maxAreaMenu = document.querySelector('[data-filter-key="maxArea"] .filter-options');
-        if (maxAreaMenu) {
-          
-          let areasToShow = [...uniqueAreasFromFilteredData];
-          
-          if (filters.minArea !== null && filters.minArea !== "") {
-            const minLimit = Number(filters.minArea);
-            areasToShow = areasToShow.filter(area => area >= minLimit);
-          }
-          
-          maxAreaMenu.innerHTML = areasToShow.map(area => `
-      <li><a href="#" data-value="${area}" class="block px-4 py-2 hover:bg-indigo-600 hover:text-white">${area} м²</a></li>
-    `).join('');
-
-        }
-      }
-
-      
-      function attachFilterHandlers() {
-        document.querySelectorAll('.relative[data-filter-key]').forEach(wrapper => {
-          const key = wrapper.dataset.filterKey;          
-          const button = wrapper.querySelector('.filter-toggle');
-          const menu = wrapper.querySelector('.filter-options');
-          if (!button || !menu) return;
-
-          
-          button.addEventListener('click', e => {
-            e.stopPropagation();
-            document.querySelectorAll('.filter-options.show')
-              .forEach(m => m.classList.remove('show'));
-            menu.classList.toggle('show');
-          });
-
-          
-          menu.addEventListener('click', e => {
-            const option = e.target.closest('a[data-value]');
-            if (!option) return;                
-            e.preventDefault();
-
-            const selectedValue = option.dataset.value;
-            const selectedText = option.textContent.trim();
-
-            
-            const shouldReset =
-              (filters[key] === selectedValue) ||
-              (selectedValue === "" || selectedValue === undefined);
-
-            
-            menu.querySelectorAll('a')
-              .forEach(a => a.classList.remove('bg-indigo-600', 'text-white'));
-            button.classList.remove('bg-indigo-600', 'text-white');
-
-            
-            let filtersChanged = false;
-            let areaFiltersCorrected = false;
-
-            if (shouldReset) {
-              delete filters[key];
-              filtersChanged = true;
-
-              const placeholder =
-                button.dataset.placeholder
-                || (key === 'place' ? 'Площадка'
-                  : key === 'purpose' ? 'Назначение'
-                    : `Выберите ${key}`);
-
-              button.querySelector('.filter-label').textContent = placeholder;
-            } else {
-              
-              if (key === 'minArea' && filters.maxArea &&
-                Number(selectedValue) > Number(filters.maxArea)) {
-                delete filters.maxArea;
-                areaFiltersCorrected = true;
-              }
-              if (key === 'maxArea' && filters.minArea &&
-                Number(selectedValue) < Number(filters.minArea)) {
-                delete filters.minArea;
-                areaFiltersCorrected = true;
-              }
-
-              filters[key] = selectedValue;
-              filtersChanged = true;
-
-              
-              option.classList.add('bg-indigo-600', 'text-white');
-              button.classList.add('bg-indigo-600', 'text-white');
-
-              
-              if (key === 'minArea' || key === 'maxArea') {
-                button.querySelector('.filter-label').textContent =
-                  key === 'minArea'
-                    ? `От ${selectedValue} м²`
-                    : `До ${selectedValue} м²`;
-              } else if (key === 'place') {
-                button.querySelector('.filter-label').textContent = selectedText;
-              } else if (key === 'purpose') {
-                const labels = {
-                  land: 'Земельные участки',
-                  office: 'Офисные помещения',
-                  warehouse: 'Складские помещения',
-                  production: 'Производственные',
-                  retail: 'Торговые площади'
-                };
-                button.querySelector('.filter-label').textContent =
-                  labels[selectedValue] ?? selectedText;
-              }
-            }
-
-            
-            menu.classList.remove('show');
-
-            
-            if (filtersChanged || areaFiltersCorrected) {
-              const currentUrl = new URL(window.location);
-              Object.entries(filters).forEach(([k, v]) => {
-                v ? currentUrl.searchParams.set(k, v)
-                  : currentUrl.searchParams.delete(k);
-              });
-              
-              if (purposeFromUrl && !currentUrl.searchParams.has('purpose')) {
-                currentUrl.searchParams.set('purpose', purposeFromUrl);
-              }
-              history.pushState(null, '', currentUrl);
-            }
-
-            
-            renderListings();
-          });
-        });
-
-        
-        document.addEventListener('click', () => {
-          document.querySelectorAll('.filter-options.show')
-            .forEach(m => m.classList.remove('show'));
-        });
-      }
-
-
-      
-      renderListings();
-      attachFilterHandlers();
-
- 
-      
+      ['purpose','place','minArea','maxArea'].forEach(k=>filters[k]?url.searchParams.set(k,filters[k]):url.searchParams.delete(k));
+      history.pushState(null,'',url);
+      updateFilterButtonLabels(filters);
+      if(key==='purpose')updateBreadcrumbAndHeading(filters.purpose);
+      renderListings(filters,suitableFilters);
+      menu.classList.remove('show');
     });
-
-    
-    function generatePurposeOptions() {
-      const wrapper = document.querySelector('[data-filter-key="purpose"] .filter-options');
-      if (!wrapper) return;
-
-      const labels = {
-        land: 'Земельные участки',
-        office: 'Офисные помещения',
-        warehouse: 'Складские помещения',
-        production: 'Производственные',
-        retail: 'Торговые площади'
-      };
-
-      wrapper.innerHTML = Object.keys(dataByPurpose)
-        .map(k => `<li><a href="#" data-value="${k}" class="block px-4 py-2 hover:bg-purple-100">
-                 ${labels[k] ?? k}
-               </a></li>`).join('');
-    }
+  });
+  document.addEventListener('click',()=>document.querySelectorAll('.filter-options.show').forEach(m=>m.classList.remove('show')));
+}
 
 
-  </script>
-
+</script>
 
 
     <!-- Modal -->
