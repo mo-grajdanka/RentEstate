@@ -12,14 +12,49 @@ var dataByPurpose = {
       name: "Участок A",
       place: "Кушелевская дорога",
 coordinates: [59.986111, 30.368838],
-      area: 120,
+address: "Санкт-Петербург, Кушелевская дорога, 1А", 
+  transport: [                                              
+    { line: "Лесная", icon: "🚇", time: "16–20 мин" },
+    { line: "Площадь Мужества", icon: "🚊", time: "21–30 мин" },
+    { line: "Выборгская", icon: "🚇", time: "от 31 мин" }
+  ],
+      area: 30,
       mainSlider: true,
       adSlider: true,
-      suitableFor: ["Кафе", "Футбол", "Магазин"],
-      images: [
-        "https://images.unsplash.com/photo-1656537191526-22109a84cd92?w=400&h=200&fit=crop",
-        "https://plus.unsplash.com/premium_photo-1674019235838-df82b9c83f4e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8bGFuZHxlbnwwfHwwfHx8MA%3D%3D",
-        "https://plus.unsplash.com/premium_photo-1697644693174-216346d85792?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTN8fGxhbmR8ZW58MHx8MHx8fDA%3D",
+            suitableFor: ["Кафе", "Футбол", "Магазин"],
+      description:
+        "Просторный земельный участок в живописном районе Кушелевской дороги, идеально подходит для строительства загородного дома или дачи. Участок ровный, правильной формы, с легким уклоном. Развитая инфраструктура: рядом остановка общественного транспорта, магазины, школа и детский сад.",
+            characteristics: [
+        { label: "✔️", value: "уже заселены ЖК «Кирилл и Дарья», ЖК «Калейдоскоп», ЖК «Дом на Блюхера», ЖК «БелАрт», ЖК «Калина парк», ЖК «Калина-Парк 2»" },
+        { label: "✔️", value: "в 2026 году сдается ЖК Rеsресt" },
+        { label: "✔️", value: "более 7 общеобразовательных и частных школ" },
+        { label: "✔️", value: "8 детских садов" },
+        { label: "✔️", value: "взрослые и детские поликлиники" },
+        { label: "✔️", value: "есть проход из жилого квартала" },
+        { label: "✔️", value: "более 200 000 человек численность населения" },
+        
+      ],
+      technicalCharacteristics: [
+        {
+          label: "Коммуникации",
+          value: "❗️Есть точки подключения электроснабжения, водоснабжения и водоотведения.",
+        },
+        
+      ],
+  transportCharacteristics: [
+    { label: "✔️", value: "в 1 минуте 4 остановки автобусов и троллейбусов" },
+    { label: "✔️", value: "в 5 минутах ж/д станция Кушелевка" },
+    { label: "✔️", value: "в 10 минутах м. Лесная" },
+    { label: "✔️", value: "в 15 минутах м. Площадь Мужества" },
+    { label: "✔️", value: "в 20 минутах центр города" },
+    { label: "✔️", value: "более 3 000 м/ч транспортный поток" },
+  ],
+        images: [
+        "https://50.img.avito.st/image/1/1.xaTRFLa5aU3no-tA13Pt7qW1a0tvtetb57hrT2OhbU8.E2Y6tPb0gXT8NIOJkDPJ4pwYTTByJjHAfbyY6tBok1I",
+        "https://90.img.avito.st/image/1/1.FRgVLra5ufEjmTv8MwJ_e3GPu_erjzvnI4K786ebvfM.cnPwHM7OnpJATxfrH52vG__h3s-OI2EC4bH3D-nbh5Y",
+        "https://90.img.avito.st/image/1/1.TEBU3ba54KliamKkQOh8Hi184q_qfGK_YnHiq-Zo5Ks.wAp4Zovc3KR2D9acs7JHz-jRCj_EkNGWHIlFXuC26c4",
+        "https://50.img.avito.st/image/1/1.Av7lWLa5rhfT7ywa7XBMz_n5rBFb-SwB0_SsFVftqhU.fwP5qi9R_TV8bEPnxBszE-26bRstKaMs8QTE9oWbMtQ",
+        "https://60.img.avito.st/image/1/1.gmCj77a5LomVWKyEq5nDUb9OLI8dTqyflUMsixFaKos.MDY6AO-GEl24pnPxIYiHfmaZ2W0xdP23YR5WPa36tqg",
       ],
     },
     {
@@ -218,13 +253,69 @@ coordinates: [59.990552, 30.383626],
     {
       id: 1,
       name: "Производство A",
-      area: 300,
-      place: "Кушелевская дорога",
+      area: 250,
+      address: "Санкт-Петербург, Бестужевская ул., 2к4Б", 
+  transport: [                                              
+    { line: "Площадь Мужества", icon: "🚇", time: "21–30 мин" },
+    { line: "Политехническая", icon: "🚊", time: "от 31 мин" },
+    { line: "Академическая", icon: "🚇", time: "от 31 мин" }
+  ],
+    transportCharacteristics: [
+    { label: "✔️", value: "5 минут до 2 остановок автобуса" },
+    { label: "✔️", value: "10 минут от станции м. Лесная" },
+    { label: "✔️", value: "15 минут до КАД" },
+    { label: "✔️", value: "20 минут до центра города" },
+    { label: "✔️", value: "более 3 000 м/ч транспортный поток" }
+  ],
+    
+
+  characteristics: [
+        { label: "✔️", value: "рядом ЖК «Cinema», ЖК «Кантемировский», ЖК «Суворов», ЖК «Полюстрово Парк»" },
+        { label: "✔️", value: "более 100 000 человек численность населения" },
+        { label: "✔️", value: "2 000 м/ч транспортный поток" },
+        
+      ],
+
+  technicalCharacteristics: [
+        {
+          label: "✔️",
+          value: "1 этаж",
+        },
+        {
+          label: "✔️",
+          value: "высота потолков 4-5м",
+        },
+        {
+          label: "✔️",
+          value: "высокие въездные ворота",
+        },
+        {
+          label: "✔️",
+          value: "полностью готовы к заезду",
+        },
+        
+      ],
+
+  
+    internalTerritory: [
+    "круглосуточный доступ",
+    "въезд с Бестужевской улицы",
+    "сформированная экосистема",
+    "промышленно-деловая территория",
+    "площадка для отстоя и манёврирования",
+    "разворотные площадки для грузового транспорта",
+    "парковка для легкового и грузового транспорта",
+    "есть освещение"
+  ],
+        description:"⚡️ ПOMЕЩEHИЯ В OTДЕЛЬНОСTОЯЩEМ ЗДАНИИ HAПPЯMУЮ ОT COБCTBЕННИKА! Возмoжнa aрeндa пoмещeния от 100 до 400 кв.м.",
+      place: "Бестужевская",
 coordinates: [59.986111, 30.368838],
       images: [
-        "https://images.unsplash.com/photo-1526152505827-d2f3b5b4a52a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
-        "https://images.unsplash.com/photo-1511317559916-56d5ddb62563?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHJldGFpbHxlbnwwfHwwfHx8MA%3D%3D",
-        "https://images.unsplash.com/36/yJl7OB3sSpOdEIpHhZhd_DSC_1929_1.jpg?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8cmV0YWlsfGVufDB8fDB8fHww",
+        "https://00.img.avito.st/image/1/1.azT43ba5x93OakXQosRff4x8xdtGfEXLznHF30pow98.xwLL--AQhFyteFjO3UTo13uxYYBlP-0BKjulVYLRWkY?cqp=2.u3NCSNufGJscbkbcTnB31iWF9mNdkZV17CfHaAg72eFO7oRH9LnvmRn80XUuwm6DChCt8IaEfKU2EJELfVQEoXVU2aPjLQ==",
+        "https://90.img.avito.st/image/1/1.cEnqJLa53KDck16thjlcBcOF3qZUhV623IjeoliR2KI.CTlUhQXZ0xZUlyZ-FiDr4ervUMt2l43cZXz4ZDXoDio",
+        "https://90.img.avito.st/image/1/1.jmERyLa5Iognf6CFAYK8fRZpII6vaaCeJ2QgiqN9Joo.G1ECs2X3i0bEa-ULdTk7eHJoXmam2HYY1Xh9ESWjHLA",
+        "https://20.img.avito.st/image/1/1.OlK4xba5lruOchS2wIlaT79klL0GZBStjmmUuQpwkrk.4H8kG0NSxaWWNRgdHzYKU40OUXZgGqRHP2n3-TOBWMA?cqp=2.u3NCSNufGJscbkbcTnB31iWF9mNdkZV17CfHaAg72eFO7oRH9LnvmRn80XUuwm6DChCt8IaEfKU2EJELfVQEoXVU2aPjLQ==",
+        "https://10.img.avito.st/image/1/1.WoF8ura59mhKDXRlROtYz2Qb9G7CG3R-Shb0as4P8mo.hBtJFHLJ_rGrh4up0AGIt5tR8OJDGKFNAgUWxbRE6jM?cqp=2.u3NCSNufGJscbkbcTnB31iWF9mNdkZV17CfHaAg72eFO7oRH9LnvmRn80XUuwm6DChCt8IaEfKU2EJELfVQEoXVU2aPjLQ==",
       ],
     },
     {
