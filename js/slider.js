@@ -1,5 +1,3 @@
-
-
 document.addEventListener('DOMContentLoaded', () => {
  
   const mainSliderItems = Object
@@ -16,23 +14,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
   sliderContainer.innerHTML = '';
     mainSliderItems.forEach(item => {
-        const detailUrl = `pages/detail.html?purpose=${encodeURIComponent(item.purpose)}&id=${item.id}`;
-        const slideDiv = document.createElement('div');
-        slideDiv.className = 'w-full flex-shrink-0 box-border';
-        slideDiv.innerHTML = /* html */`
-          <div class="p-4 h-full flex flex-col justify-between">
-            <img src="${item.images[0]}" alt="${item.name}"
-                 class="w-full h-48 object-cover rounded-md mb-4">
-            <div class="text-center font-medium mb-2">${item.name}</div>
-            <p class="text-gray-600 mb-4 text-center">Площадь: ${item.area} м²</p>
-            <div class="text-right">
-              <a href="${detailUrl}" class="text-blue-600 hover:underline font-medium">
-                Подробнее
-              </a>
-            </div>
-          </div>`;
-        sliderContainer.appendChild(slideDiv);
-    });
+  const detailUrl = `pages/detail.html?purpose=${encodeURIComponent(item.purpose)}&id=${item.id}`;
+  const slideDiv = document.createElement('div');
+  slideDiv.className = 'w-full flex-shrink-0 box-border';
+
+  slideDiv.innerHTML = `
+    <div class="p-4 flex flex-col">
+      <img src="${item.images[0]}" alt="${item.name}"
+           class="w-full h-40 object-cover rounded-md mb-4">
+      <div class="text-center font-medium mb-2">${item.name}</div>
+      <p class="text-gray-600 mb-4 text-center">Площадь: ${item.area} м²</p>
+      <!-- проставляем mt-auto, чтобы ссылка не улетала -->
+      <div class="text-right mt-auto">
+        <a href="${detailUrl}" class="text-blue-600 hover:underline font-medium">
+          Подробнее
+        </a>
+      </div>
+    </div>`;
+
+  sliderContainer.appendChild(slideDiv);
+});
 
    
     const total = mainSliderItems.length;
