@@ -8,22 +8,24 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <link rel="stylesheet" href="/style/style.css">
+  <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
   <script defer src="/js/modal.js"></script>
   <script defer src="/js/script.js"></script>
+  <script defer src="/js/detail_map.js"></script>
 </head>
 
 <body class="flex flex-col min-h-screen bg-gray-50 font-sans">
   <script src="data.js"></script>
-  
+
   <header class="bg-gray-100 sticky top-0 z-50 shadow-md">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center">
-        
+
         <div class="ml-2 text-xl font-semibold">(Лого) Название компании</div>
       </div>
 
-      
-      <nav id="mobileMenu" class="hidden fixed inset-x-0 top-16 bg-white shadow-md py-4 px-6 space-y-4">
+
+      <nav id="mobileMenu" class="hidden fixed top-16 right-0 w-64 bg-white shadow-md py-4 px-6 space-y-4">
         <a href="#" class="block text-gray-700 hover:text-blue-600">Недвижимость</a>
         <a href="#" class="block text-gray-700 hover:text-blue-600">Услуги</a>
         <a href="#" class="block text-gray-700 hover:text-blue-600">Компания</a>
@@ -86,7 +88,7 @@
     if (hamburgerMenu) {
       hamburgerMenu.addEventListener('click', function () {
         this.classList.toggle('active');
-        
+
       });
     }
 
@@ -116,7 +118,7 @@
   </script>
 
   <main class="flex-grow container mx-auto px-4 py-8">
-    
+
     <nav class="text-sm text-gray-500 mb-4" aria-label="breadcrumb">
       <ol class="inline-flex list-none p-0">
         <li class="flex items-center">
@@ -131,53 +133,102 @@
       </ol>
     </nav>
 
-    
-    <div class="relative bg-white rounded-lg shadow overflow-hidden mb-8">
-      <img id="main-img" src="" alt="" class="w-full h-[200px] sm:h-[400px] object-cover">
-      <button id="prev" class="hidden sm:block absolute left-2 top-1/2 transform -translate-y-1/2
-         text-3xl text-white bg-black bg-opacity-30 p-2 rounded-full">
-        ‹
-      </button>
-      <button id="next" class="hidden sm:block absolute right-2 top-1/2 transform -translate-y-1/2
-         text-3xl text-white bg-black bg-opacity-30 p-2 rounded-full">
-        ›
-      </button>
-    </div>
 
-    
+<div class="relative bg-white rounded-lg shadow mb-8">
+  <img
+    id="main-img"
+    src=""
+    alt=""
+    class="w-full h-auto max-h-[400px] sm:max-h-[600px] object-contain mx-auto"
+  />
+
+  <button
+    id="prev"
+    class="hidden sm:block absolute left-2 top-1/2 -translate-y-1/2
+           text-3xl text-white bg-black bg-opacity-30 p-2 rounded-full"
+  >‹</button>
+  <button
+    id="next"
+    class="hidden sm:block absolute right-2 top-1/2 -translate-y-1/2
+           text-3xl text-white bg-black bg-opacity-30 p-2 rounded-full"
+  >›</button>
+</div>
+
+
+
     <div class="grid lg:grid-cols-3 gap-6 mb-12">
       <section class="lg:col-span-2 bg-white rounded-lg shadow-lg p-6">
         <h1 id="item-name" class="text-3xl font-bold mb-2"></h1>
-        <p id="item-extra" class="text-gray-600 mb-4"></p>
-        <ul id="item-features" class="list-disc list-inside text-gray-700"></ul>
+        <div class="grid md:grid-cols-2 gap-6 mt-6">
+          <div>
+            <p id="item-extra" class="text-gray-600 mb-4"></p>
+            <ul id="item-features" class="list-disc list-inside text-gray-700"></ul>
 
-        <div>
-          <h2 class="text-xl font-semibold mb-3">Описание</h2>
-          <p id="item-description" class="text-gray-700 mb-3"></p>
+
+
+
+
+            <div>
+              <h2 class="text-xl font-semibold mb-3">Описание</h2>
+              <p id="item-description" class="text-gray-700 mb-3"></p>
+            </div>
+
+            <div class="mt-6">
+              <h2 class="text-xl font-semibold mb-3">Возможные бизнесы</h2>
+              <p id="item-suitable-for" class="text-gray-700 mb-3">Информация отсутствует.</p>
+            </div>
+            <div class="mt-6">
+              <h2 class="text-xl font-semibold mb-3">Расположение</h2>
+              <p id="item-location" class="text-gray-700 mb-3">Информация отсутствует.</p>
+            </div>
+          </div>
+          <div>
+            <div class="mb-6">
+              <h2 class="text-xl font-semibold mb-3">Расположение на карте</h2>
+              <div id="detail-map" class="w-full h-64 rounded-lg border"></div>
+            </div>
+          </div>
+
         </div>
 
-        <div class="mt-6">
-          <h2 class="text-xl font-semibold mb-3">Возможные бизнесы</h2>
-          <p id="item-suitable-for" class="text-gray-700 mb-3">Информация отсутствует.</p>
-        </div>
-        
+
+
         <hr class="t-layout-divider">
 
 
-        
-        
+
+
         <div class="grid md:grid-cols-2 gap-6 mt-6">
-          
-          <div>
-            <h3 class="text-lg font-medium mb-3">Характеристики</h3>
-            <ul id="item-characteristics-list" class="list-disc list-inside text-gray-700 space-y-1"></ul>
+
+                    <div>
+            <div class="mb-6">
+          <h3 class="text-lg font-medium mb-3">Технические характеристики</h3>
+            <ul id="item-technical-characteristics-list" class="list-none text-gray-700 space-y-1"></ul>
+                        </div>
           </div>
 
-          
-          <div class="md:border-l md:border-gray-300 md:pl-6">
-            <h3 class="text-lg font-medium mb-3">Технические характеристики</h3>
-            <ul id="item-technical-characteristics-list" class="list-disc list-inside text-gray-700 space-y-1"></ul>
+
+
+
+<div class="md:border-l md:border-gray-300 md:pl-6">
+  <h3 class="text-lg font-medium mb-3">Транспортная инфраструктура:</h3>
+  <ul id="item-transport-list" class="list-none pl-0 text-gray-700 space-y-1"></ul>
+</div>
+
+
+
+<div id="block-internal-territory">
+  <h3 class="text-lg font-medium mb-3">Внутренняя территория</h3>
+  <ul id="item-internal-territory-list" class="list-none pl-0 text-gray-700 space-y-1"></ul>
+</div>
+
+<div class="md:border-l md:border-gray-300 md:pl-6">
+            <h3 class="text-lg font-medium mb-3">Жилая инфраструктура</h3>
+            <!-- <h3 class="text-lg font-medium mb-3">Характеристики</h3> -->
+            <ul id="item-characteristics-list" class="list-none text-gray-700 space-y-1"></ul>
           </div>
+
+
         </div>
 
 
@@ -185,7 +236,9 @@
 
 
       </section>
-      <aside class="bg-white rounded-lg shadow p-6 flex flex-col justify-between">
+
+
+      <!-- <aside class="bg-white rounded-lg shadow p-6 flex flex-col justify-between">
         <div>
           <h3 class="font-semibold mb-2">ФИО эксперта</h3>
           <p class="text-gray-600 mb-4">+7 (123) 123‑45‑67</p>
@@ -194,24 +247,39 @@
         <button class="mt-6 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded">
           Консультация эксперта
         </button>
-      </aside>
+      </aside> -->
+
+      <aside class="bg-white rounded-lg shadow p-4 flex flex-col justify-start h-fit max-h-60">
+  <div>
+    <h3 class="font-semibold mb-2">ФИО эксперта</h3>
+    <p class="text-gray-600 mb-2">+7 (123) 123-45-67</p>
+    <p class="text-gray-600">expert@company.ru</p>
+  </div>
+  <button class="mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded">
+    Консультация эксперта
+  </button>
+</aside>
+
+
+
+
     </div>
 
-    
+
     <section class="mb-12">
       <h2 class="text-xl font-semibold mb-4">Вас могут заинтересовать</h2>
       <div id="related" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
     </section>
   </main>
 
-  
+
   <footer class="mt-auto bg-gray-900 text-gray-300 pt-16 pb-8">
     <div class="container mx-auto px-4">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-        
+
         <div>
           <div class="flex items-center mb-4">
-            
+
             <div class="ml-2 text-xl font-semibold text-white">(Лого) Название компании</div>
           </div>
           <p class="mb-4">
@@ -225,23 +293,23 @@
           </div>
         </div>
 
-        
+
         <div>
           <h3 class="text-white text-lg font-semibold mb-4">Недвижимость</h3>
           <ul class="space-y-2">
-            
-            
+
+
             <li><a href="#" class="hover:text-white">Офисы</a></li>
             <li><a href="#" class="hover:text-white">Коммерческая недвижимость</a></li>
-            
+
           </ul>
         </div>
 
-        
+
         <div>
           <h3 class="text-white text-lg font-semibold mb-4">Услуги</h3>
           <ul class="space-y-2">
-            
+
             <li><a href="#" class="hover:text-white">Аренда офисов</a></li>
             <li><a href="#" class="hover:text-white">Юридические услуги</a></li>
             <li><a href="#" class="hover:text-white">Оценка недвижимости</a></li>
@@ -249,7 +317,7 @@
           </ul>
         </div>
 
-        
+
         <div>
           <h3 class="text-white text-lg font-semibold mb-4">Контакты</h3>
           <ul class="space-y-2">
@@ -288,13 +356,13 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      
+
       document.querySelector('.hamburger-menu').onclick = () => {
         document.getElementById('mobileMenu').classList.toggle('hidden');
       };
 
 
-      
+
       const params = new URLSearchParams(window.location.search);
       const purpose = params.get('purpose') || 'land';
       const id = +params.get('id');
@@ -304,7 +372,32 @@
         throw '';
       }
 
-      
+      const blockIT = document.getElementById('block-internal-territory');
+const itList  = document.getElementById('item-internal-territory-list');
+
+// if (Array.isArray(item.internalTerritory) && item.internalTerritory.length) {
+//   // рендерим элементы
+//   itList.innerHTML = item.internalTerritory
+//     .map(v => `<li>✔️ ${v}</li>`)
+//     .join('');
+// } else {
+//   // если нет данных — скрываем весь блок
+//   blockIT.style.display = 'none';
+// }
+
+if (Array.isArray(item.internalTerritory) && item.internalTerritory.length) {
+  // рендерим элементы
+  itList.innerHTML = item.internalTerritory
+    .map(v => `<li>✔️ ${v}</li>`)
+    .join('');
+} else {
+  // делаем невидимым, но сохраняем отступы
+  // blockIT.style.visibility = 'hidden';
+ 
+  blockIT.classList.add('invisible');
+}
+
+
       const labels = {
         land: 'Земельные участки',
         office: 'Офисные помещения',
@@ -324,22 +417,23 @@
         : item.floor
           ? `Этаж: ${item.floor}`
           : '';
-      const features = [];
-      
-      features.push(`Площадь: ${item.area} м²`);
-      
-      if (item.place) {
-        features.push(`Площадка: ${item.place}`);
-      }
-      
-      if (item.floor !== undefined) {
-        features.push(`Этаж: ${item.floor}`);
-      }
-      
+const features = [];
+
+
+const unit = item.name === 'Участок A' ? 'сот.' : 'м²';
+features.push(`Площадь: ${item.area} ${unit}`);
+
+if (item.place) {
+  features.push(`Площадка: ${item.place}`);
+}
+if (item.floor !== undefined) {
+  features.push(`Этаж: ${item.floor}`);
+}
+
       const ul = document.getElementById('item-features');
       ul.innerHTML = features.map(f => `<li>${f}</li>`).join('');
 
-      
+
       const imgs = item.images;
       let idx = 0;
       const imgEl = document.getElementById('main-img');
@@ -348,11 +442,11 @@
         imgEl.src = imgs[idx];
       }
 
-      
+
       const AUTO_DELAY = 3000;
       let autoTimer = setInterval(() => show(idx + 1), AUTO_DELAY);
 
-      
+
       document.getElementById('prev').addEventListener('click', () => {
         clearInterval(autoTimer);
         show(idx - 1);
@@ -364,12 +458,12 @@
         autoTimer = setInterval(() => show(idx + 1), AUTO_DELAY);
       });
 
-      
+
       show(0);
 
 
 
-      
+
       const related = document.getElementById('related');
       dataByPurpose[purpose]
         .filter(x => x.id !== id)
@@ -396,8 +490,8 @@
 
 
 
-      
-      
+
+
       const descriptionElement = document.getElementById('item-description');
       if (descriptionElement) {
         descriptionElement.textContent = item.description || 'Описание отсутствует.';
@@ -413,14 +507,28 @@
         }
       }
 
-      
+const locEl = document.getElementById('item-location');
+if (locEl) {
+  const address = item.address || 'Адрес не указан';
+  let transportHtml = '';
+  if (Array.isArray(item.transport) && item.transport.length) {
+    transportHtml = item.transport
+      .map(t => `${t.icon} ${t.line} — ${t.time}`)
+      .join('<br>');  
+  } else {
+    transportHtml = 'Информация отсутствует.';
+  }
+  locEl.innerHTML = `<strong>${address}</strong><br>${transportHtml}`;
+}
+
+
       const characteristicsList = document.getElementById('item-characteristics-list');
       if (characteristicsList) {
-        characteristicsList.innerHTML = ''; 
+        characteristicsList.innerHTML = '';
         if (item.characteristics && Array.isArray(item.characteristics) && item.characteristics.length > 0) {
           item.characteristics.forEach(char => {
             const li = document.createElement('li');
-            
+
             li.textContent = char.label && char.value ? `${char.label}: ${char.value}` : 'Некорректные данные';
             characteristicsList.appendChild(li);
           });
@@ -430,14 +538,33 @@
           characteristicsList.appendChild(li);
         }
       }
+const tcList = document.getElementById('item-transport-list');
+if (tcList) {
+  if (Array.isArray(item.transportCharacteristics) && item.transportCharacteristics.length) {
+    tcList.innerHTML = item.transportCharacteristics
+      .map(tc => `<li>${tc.label} ${tc.value}</li>`)
+      .join('');
+  } else {
+    tcList.innerHTML = '<li>Информация отсутствует.</li>';
+  }
+}
+
+const riList = document.getElementById('item-residential-list');
+if (riList) {
+  const arr = item.residentialInfrastructure || [];
+  riList.innerHTML = arr.length
+    ? arr.map(v => `<li>✔️ ${v}</li>`).join('')
+    : '<li>Информация отсутствует.</li>';
+}
+
 
       const technicalCharacteristicsList = document.getElementById('item-technical-characteristics-list');
       if (technicalCharacteristicsList) {
-        technicalCharacteristicsList.innerHTML = ''; 
+        technicalCharacteristicsList.innerHTML = '';
         if (item.technicalCharacteristics && Array.isArray(item.technicalCharacteristics) && item.technicalCharacteristics.length > 0) {
           item.technicalCharacteristics.forEach(char => {
             const li = document.createElement('li');
-            
+
             li.textContent = char.label && char.value ? `${char.label}: ${char.value}` : 'Некорректные данные';
             technicalCharacteristicsList.appendChild(li);
           });
@@ -452,7 +579,7 @@
   </script>
 
 
-  
+
   <div id="modal" class="modal fixed inset-0 z-50 flex items-center justify-center hidden">
     <div class="modal-overlay absolute inset-0"></div>
     <div class="modal-container bg-white w-full max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-y-auto">
